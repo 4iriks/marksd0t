@@ -74,3 +74,97 @@ def create_note():
         'created_at': note.created_at.isoformat(),
         'updated_at': note.updated_at.isoformat()
     }), 201
+
+
+
+@api.route('/notes/<int:note_id>', methods=['GET'])
+def get_note(note_id):
+    """Получить заметку по ID"""
+    db = next(get_db())
+    note = db.query(Note).filter(Note.id == note_id).first()
+    
+    if not note:
+        return jsonify({'error': 'Note not found'}), 404
+    
+    return jsonify({
+        'id': note.id,
+        'title': note.title,
+        'description': note.description,
+        'status': note.status,
+        'tags': [tag.name for tag in note.tags],
+        'created_at': note.created_at.isoformat(),
+        'updated_at': note.updated_at.isoformat()
+    })
+
+
+@api.route('/notes/<int:note_id>', methods=['PUT'])
+def update_note(note_id):
+    """Обновить заметку"""
+    db = next(get_db())
+    note = db.query(Note).filter(Note.id == note_id).first()
+    
+    if not note:
+        return jsonify({'error': 'Note not found'}), 404
+    
+    data = request.json
+    
+    if 'title' in data:
+        if not data['title']:
+            return jsonify({'error': 'Title cannot be empty'}), 400
+        note.title = data['title']
+    
+    if 'description' in data:
+        note.description = data['description']
+    
+    if 'status' in data:
+        note.status = data['status']
+    
+    if 'tags' in data:
+        note.tags.clear()
+        for tag_name in data['tags']:
+            tag = db.query(Tag).filter(Tag.name == tag_name).first()
+            if not tag:
+                tag = Tag(name=tag_name)
+                db.add(tag)
+            note.tags.append(tag)
+    
+    note.updated_at = datetime.utcnow()
+    db.commit()
+    db.refresh(note)
+    
+    return jsonify({
+        'id': note.id,
+        'title': note.title,
+        'description': note.description,
+        'status': note.status,
+        'tags': [tag.name for tag in note.tags],
+        'created_at': note.created_at.isoformat(),
+        'updated_at': note.updated_at.isoformat()
+    })
+
+
+@api.route('/notes/<int:note_id>', methods=['DELETE'])
+def delete_note(note_id):
+    """Удалить заметку"""
+    db = next(get_db())
+    note = db.query(Note).filter(Note.id == note_id).first()
+    
+    if not note:
+        return jsonify({'error': 'Note not found'}), 404
+    
+    db.delete(note)
+    db.commit()
+    
+    return '', 204
+
+
+@api.route('/tags', methods=['GET'])
+def get_tags():
+    """Получить все используемые метки"""
+    db = next(get_db())
+    tags = db.query(Tag).join(Tag.notes).distinct().all()
+    
+    return jsonify([{
+        'id': tag.id,
+        'name': tag.name
+    } for tag in tags])
