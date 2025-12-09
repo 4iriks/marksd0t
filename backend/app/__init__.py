@@ -8,4 +8,8 @@ def create_app():
     
     app.config['SECRET_KEY'] = 'dev-secret-key'
     
+    # Регистрируем blueprint
+    from .routes import api
+    app.register_blueprint(api)
+    
     return app
