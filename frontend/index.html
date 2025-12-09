@@ -3,13 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MarksDot - Заметки</title>
+    <title>MarksDot - Заметки и задачи</title>
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <div id="app">
-        <h1>MarksDot</h1>
+    <div class="container">
+        <header>
+            <h1>📝 MarksDot</h1>
+            <p>Сервис заметок и задач</p>
+        </header>
+
+        <main>
+            <!-- Форма создания заметки -->
+            <section class="note-form">
+                <h2>Создать заметку</h2>
+                <form id="createNoteForm">
+                    <input type="text" id="noteTitle" placeholder="Заголовок" required>
+                    <textarea id="noteDescription" placeholder="Описание"></textarea>
+                    <div class="form-row">
+                        <select id="noteStatus">
+                            <option value="Новая">Новая</option>
+                            <option value="В работе">В работе</option>
+                            <option value="Завершена">Завершена</option>
+                        </select>
+                        <input type="text" id="noteTags" placeholder="Метки (через запятую)">
+                    </div>
+                    <button type="submit">Добавить заметку</button>
+                </form>
+            </section>
+
+            <!-- Фильтры -->
+            <section class="filters">
+                <h3>Фильтры</h3>
+                <div class="filter-controls">
+                    <select id="filterStatus">
+                        <option value="">Все статусы</option>
+                        <option value="Новая">Новая</option>
+                        <option value="В работе">В работе</option>
+                        <option value="Завершена">Завершена</option>
+                    </select>
+                    <select id="filterTag">
+                        <option value="">Все метки</option>
+                    </select>
+                    <button id="resetFilters">Сбросить фильтры</button>
+                </div>
+            </section>
+
+            <!-- Список заметок -->
+            <section class="notes-list">
+                <h3>Заметки</h3>
+                <div id="notesList"></div>
+            </section>
+        </main>
     </div>
+
+    <script src="js/api.js"></script>
     <script src="js/app.js"></script>
 </body>
 </html>
