@@ -12,3 +12,8 @@ def get_notes():
     db = next(get_db())
     
     query = db.query(Note)
+    
+    # Фильтрация по статусу
+    status = request.args.get('status')
+    if status:
+        query = query.filter(Note.status == status)
