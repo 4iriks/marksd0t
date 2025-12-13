@@ -31,6 +31,22 @@
                     <button type="submit">Добавить заметку</button>
                 </form>
             </section>
+            <!-- Фильтры -->
+            <section class="filters">
+                <h3>Фильтры</h3>
+                <div class="filter-controls">
+                    <select id="filterStatus">
+                        <option value="">Все статусы</option>
+                        <option value="Новая">Новая</option>
+                        <option value="В работе">В работе</option>
+                        <option value="Завершена">Завершена</option>
+                    </select>
+                    <select id="filterTag">
+                        <option value="">Все метки</option>
+                    </select>
+                    <button id="resetFilters">Сбросить фильтры</button>
+                </div>
+            </section>
         </main>
     </div>
 </body>
