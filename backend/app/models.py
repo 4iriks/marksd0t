@@ -21,3 +21,5 @@ class Note(Base):
     status = Column(String(50), default="Новая")
     created_at = Column(DateTime, default=datetime.utcnow)
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+    
+    tags = relationship("Tag", secondary=note_tags, back_populates="notes")
