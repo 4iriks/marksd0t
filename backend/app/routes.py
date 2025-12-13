@@ -106,3 +106,7 @@ def update_note(note_id):
                 tag = Tag(name=tag_name)
                 db.add(tag)
             note.tags.append(tag)
+    
+    note.updated_at = datetime.utcnow()
+    db.commit()
+    db.refresh(note)
