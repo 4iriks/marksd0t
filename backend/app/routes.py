@@ -29,3 +29,7 @@ def create_note():
             tag = Tag(name=tag_name)
             db.add(tag)
         note.tags.append(tag)
+    
+    db.add(note)
+    db.commit()
+    db.refresh(note)
