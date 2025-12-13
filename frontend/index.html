@@ -20,6 +20,15 @@
                 <form id="createNoteForm">
                     <input type="text" id="noteTitle" placeholder="Заголовок" required>
                     <textarea id="noteDescription" placeholder="Описание"></textarea>
+                    <div class="form-row">
+                        <select id="noteStatus">
+                            <option value="Новая">Новая</option>
+                            <option value="В работе">В работе</option>
+                            <option value="Завершена">Завершена</option>
+                        </select>
+                        <input type="text" id="noteTags" placeholder="Метки (через запятую)">
+                    </div>
+                    <button type="submit">Добавить заметку</button>
                 </form>
             </section>
         </main>
