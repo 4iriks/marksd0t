@@ -11,3 +11,6 @@ def create_note():
     """Создать новую заметку"""
     db = next(get_db())
     data = request.json
+    
+    if not data.get('title'):
+        return jsonify({'error': 'Title is required'}), 400
