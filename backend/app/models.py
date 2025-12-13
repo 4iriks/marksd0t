@@ -19,3 +19,5 @@ class Note(Base):
     title = Column(String(200), nullable=False)
     description = Column(String(5000))
     status = Column(String(50), default="Новая")
+    created_at = Column(DateTime, default=datetime.utcnow)
+    updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
