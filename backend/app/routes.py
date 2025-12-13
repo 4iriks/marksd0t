@@ -20,3 +20,12 @@ def create_note():
         description=data.get('description', ''),
         status=data.get('status', 'Новая')
     )
+    
+    # Добавляем метки
+    tag_names = data.get('tags', [])
+    for tag_name in tag_names:
+        tag = db.query(Tag).filter(Tag.name == tag_name).first()
+        if not tag:
+            tag = Tag(name=tag_name)
+            db.add(tag)
+        note.tags.append(tag)
