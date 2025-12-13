@@ -14,3 +14,9 @@ def create_note():
     
     if not data.get('title'):
         return jsonify({'error': 'Title is required'}), 400
+    
+    note = Note(
+        title=data['title'],
+        description=data.get('description', ''),
+        status=data.get('status', 'Новая')
+    )
