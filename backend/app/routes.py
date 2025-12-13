@@ -15,3 +15,10 @@ def update_note(note_id):
     
     if not note:
         return jsonify({'error': 'Note not found'}), 404
+    
+    data = request.json
+    
+    if 'title' in data:
+        if not data['title']:
+            return jsonify({'error': 'Title cannot be empty'}), 400
+        note.title = data['title']
