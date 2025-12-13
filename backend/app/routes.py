@@ -6,6 +6,28 @@ from .models import Note, Tag
 api = Blueprint('api', __name__, url_prefix='/api')
 
 
+ feature/api-get-notes
+@api.route('/notes', methods=['GET'])
+def get_notes():
+    """Получить все заметки с фильтрацией"""
+    db = next(get_db())
+    
+    query = db.query(Note)
+    
+    # Фильтрация по статусу
+    status = request.args.get('status')
+    if status:
+        query = query.filter(Note.status == status)
+    
+    # Фильтрация по метке
+    tag = request.args.get('tag')
+    if tag:
+        query = query.join(Note.tags).filter(Tag.name == tag)
+    
+    notes = query.order_by(Note.created_at.desc()).all()
+    
+    return jsonify([{
+
 @api.route('/notes', methods=['POST'])
 def create_note():
     """Создать новую заметку"""
@@ -35,6 +57,7 @@ def create_note():
     db.refresh(note)
     
     return jsonify({
+main
         'id': note.id,
         'title': note.title,
         'description': note.description,
@@ -42,4 +65,7 @@ def create_note():
         'tags': [tag.name for tag in note.tags],
         'created_at': note.created_at.isoformat(),
         'updated_at': note.updated_at.isoformat()
+feature/api-get-notes
+    } for note in notes])
     }), 201
+main
