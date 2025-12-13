@@ -128,3 +128,7 @@ def delete_note(note_id):
     """Удалить заметку"""
     db = next(get_db())
     note = db.query(Note).filter(Note.id == note_id).first()
+
+    
+    if not note:
+        return jsonify({'error': 'Note not found'}), 404
