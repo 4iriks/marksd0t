@@ -120,3 +120,11 @@ def update_note(note_id):
         'created_at': note.created_at.isoformat(),
         'updated_at': note.updated_at.isoformat()
     })
+
+
+
+@api.route('/notes/<int:note_id>', methods=['DELETE'])
+def delete_note(note_id):
+    """Удалить заметку"""
+    db = next(get_db())
+    note = db.query(Note).filter(Note.id == note_id).first()
