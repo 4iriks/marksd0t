@@ -91,3 +91,9 @@ def update_note(note_id):
         if not data['title']:
             return jsonify({'error': 'Title cannot be empty'}), 400
         note.title = data['title']
+    
+    if 'description' in data:
+        note.description = data['description']
+    
+    if 'status' in data:
+        note.status = data['status']
