@@ -24,3 +24,13 @@ def get_notes():
         query = query.join(Note.tags).filter(Tag.name == tag)
     
     notes = query.order_by(Note.created_at.desc()).all()
+    
+    return jsonify([{
+        'id': note.id,
+        'title': note.title,
+        'description': note.description,
+        'status': note.status,
+        'tags': [tag.name for tag in note.tags],
+        'created_at': note.created_at.isoformat(),
+        'updated_at': note.updated_at.isoformat()
+    } for note in notes])
