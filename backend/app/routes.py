@@ -2,11 +2,18 @@ from flask import Blueprint, request, jsonify
 from sqlalchemy.orm import Session
 from .database import get_db
 from .models import Note, Tag
+feature/api-update-delete
 from datetime import datetime
+
+ main
 
 api = Blueprint('api', __name__, url_prefix='/api')
 
 
+feature/api-update-delete
+
+ feature/api-get-note
+main
 @api.route('/notes', methods=['GET'])
 def get_notes():
     """Получить все заметки с фильтрацией"""
@@ -27,6 +34,7 @@ def get_notes():
     notes = query.order_by(Note.created_at.desc()).all()
     
     return jsonify([{
+feature/api-update-delete
         'id': note.id,
         'title': note.title,
         'description': note.description,
@@ -36,6 +44,8 @@ def get_notes():
         'updated_at': note.updated_at.isoformat()
     } for note in notes])
 
+
+main
 
 @api.route('/notes', methods=['POST'])
 def create_note():
@@ -66,6 +76,10 @@ def create_note():
     db.refresh(note)
     
     return jsonify({
+ feature/api-update-delete
+
+main
+ main
         'id': note.id,
         'title': note.title,
         'description': note.description,
@@ -73,6 +87,7 @@ def create_note():
         'tags': [tag.name for tag in note.tags],
         'created_at': note.created_at.isoformat(),
         'updated_at': note.updated_at.isoformat()
+ feature/api-update-delete
     }), 201
 
 
@@ -138,3 +153,9 @@ def delete_note(note_id):
     db.commit()
     
     return '', 204
+
+feature/api-get-notes
+    } for note in notes])
+    }), 201
+main
+ main
