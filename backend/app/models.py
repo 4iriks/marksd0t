@@ -17,3 +17,5 @@ class Note(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     title = Column(String(200), nullable=False)
+    description = Column(String(5000))
+    status = Column(String(50), default="Новая")
