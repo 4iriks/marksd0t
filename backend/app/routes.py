@@ -22,3 +22,5 @@ def get_notes():
     tag = request.args.get('tag')
     if tag:
         query = query.join(Note.tags).filter(Tag.name == tag)
+    
+    notes = query.order_by(Note.created_at.desc()).all()
