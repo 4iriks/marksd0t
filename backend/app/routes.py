@@ -17,3 +17,8 @@ def get_notes():
     status = request.args.get('status')
     if status:
         query = query.filter(Note.status == status)
+    
+    # Фильтрация по метке
+    tag = request.args.get('tag')
+    if tag:
+        query = query.join(Note.tags).filter(Tag.name == tag)
