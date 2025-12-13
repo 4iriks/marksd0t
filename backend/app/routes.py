@@ -97,3 +97,12 @@ def update_note(note_id):
     
     if 'status' in data:
         note.status = data['status']
+    
+    if 'tags' in data:
+        note.tags.clear()
+        for tag_name in data['tags']:
+            tag = db.query(Tag).filter(Tag.name == tag_name).first()
+            if not tag:
+                tag = Tag(name=tag_name)
+                db.add(tag)
+            note.tags.append(tag)
