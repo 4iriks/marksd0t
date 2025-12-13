@@ -110,3 +110,13 @@ def update_note(note_id):
     note.updated_at = datetime.utcnow()
     db.commit()
     db.refresh(note)
+    
+    return jsonify({
+        'id': note.id,
+        'title': note.title,
+        'description': note.description,
+        'status': note.status,
+        'tags': [tag.name for tag in note.tags],
+        'created_at': note.created_at.isoformat(),
+        'updated_at': note.updated_at.isoformat()
+    })
