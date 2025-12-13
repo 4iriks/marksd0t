@@ -132,3 +132,9 @@ def delete_note(note_id):
     
     if not note:
         return jsonify({'error': 'Note not found'}), 404
+
+    
+    db.delete(note)
+    db.commit()
+    
+    return '', 204
