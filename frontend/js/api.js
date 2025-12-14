@@ -5,25 +5,22 @@ const api = {
         const params = new URLSearchParams(filters);
         const response = await fetch(`${API_URL}/notes?${params}`);
         return response.json();
-    }
-};
-
+    },
 
     async createNote(noteData) {
         const response = await fetch(`${API_URL}/notes`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(noteData)
+            body: JSON.stringify(noteData),
         });
         return response.json();
     },
-
 
     async updateNote(id, noteData) {
         const response = await fetch(`${API_URL}/notes/${id}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(noteData)
+            body: JSON.stringify(noteData),
         });
         return response.json();
     },
@@ -35,5 +32,5 @@ const api = {
     async getTags() {
         const response = await fetch(`${API_URL}/tags`);
         return response.json();
-    }
+    },
 };
