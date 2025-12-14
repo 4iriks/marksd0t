@@ -40,3 +40,30 @@ document.getElementById('createNoteForm').addEventListener('submit', async (e) =
     e.target.reset();
     loadNotes();
 });
+
+
+async function deleteNoteHandler(id) {
+    if (confirm('Удалить заметку?')) {
+        await api.deleteNote(id);
+        loadNotes();
+    }
+}
+
+document.getElementById('filterStatus').addEventListener('change', (e) => {
+    currentFilters.status = e.target.value || undefined;
+    loadNotes();
+});
+
+document.getElementById('filterTag').addEventListener('change', (e) => {
+    currentFilters.tag = e.target.value || undefined;
+    loadNotes();
+});
+
+document.getElementById('resetFilters').addEventListener('click', () => {
+    currentFilters = {};
+    document.getElementById('filterStatus').value = '';
+    document.getElementById('filterTag').value = '';
+    loadNotes();
+});
+
+loadNotes();
