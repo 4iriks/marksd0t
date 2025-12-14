@@ -17,3 +17,23 @@ const api = {
         });
         return response.json();
     },
+
+
+    async updateNote(id, noteData) {
+        const response = await fetch(`${API_URL}/notes/${id}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(noteData)
+        });
+        return response.json();
+    },
+
+    async deleteNote(id) {
+        await fetch(`${API_URL}/notes/${id}`, { method: 'DELETE' });
+    },
+
+    async getTags() {
+        const response = await fetch(`${API_URL}/tags`);
+        return response.json();
+    }
+};
