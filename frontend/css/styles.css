@@ -86,3 +86,78 @@ button {
 button:hover {
     transform: translateY(-2px);
 }
+
+
+.filter-controls {
+    display: grid;
+    grid-template-columns: 1fr 1fr auto;
+    gap: 15px;
+}
+
+#notesList {
+    display: grid;
+    gap: 20px;
+}
+
+.note-card {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 12px;
+    border-left: 4px solid #667eea;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.note-card:hover {
+    transform: translateX(5px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.note-card h4 {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.note-card p {
+    color: #666;
+    margin-bottom: 15px;
+}
+
+.note-meta {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 15px;
+}
+
+.status-badge, .tag-badge {
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.status-badge {
+    background: #e3f2fd;
+    color: #1976d2;
+}
+
+.tag-badge {
+    background: #f3e5f5;
+    color: #7b1fa2;
+}
+
+.note-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.note-actions button {
+    width: auto;
+    padding: 8px 16px;
+    margin: 0;
+    font-size: 14px;
+}
+
+.btn-delete {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
