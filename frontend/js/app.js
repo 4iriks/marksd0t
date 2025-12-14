@@ -26,3 +26,17 @@ function renderNotes(notes) {
         </div>
     `).join('');
 }
+
+
+document.getElementById('createNoteForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const noteData = {
+        title: document.getElementById('noteTitle').value,
+        description: document.getElementById('noteDescription').value,
+        status: document.getElementById('noteStatus').value,
+        tags: document.getElementById('noteTags').value.split(',').map(t => t.trim()).filter(t => t)
+    };
+    await api.createNote(noteData);
+    e.target.reset();
+    loadNotes();
+});
