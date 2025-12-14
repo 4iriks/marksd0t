@@ -8,26 +8,52 @@
 
 ## Технологии
 
-- Backend: Python, Flask, SQLAlchemy, SQLite
-- Frontend: HTML, CSS, JavaScript
+- Backend: Python 3.9+, Flask 2.3.0, SQLAlchemy 2.0.36, SQLite
+- Frontend: HTML, CSS, JavaScript (Vanilla)
 - CI/CD: GitHub Actions
 
-## Установка
+## Требования
+
+- Python 3.9 или выше (для Python 3.13 требуется SQLAlchemy 2.0.36+)
+
+## Установка и запуск
+
+### 1. Клонировать репозиторий
 
 ```bash
-# Клонировать репозиторий
-git clone https://github.com/4iriks/marksdot.git
-cd marksdot
+git clone https://github.com/4iriks/marksd0t.git
+cd marksd0t
+```
 
-# Установить зависимости
+### 2. Установить зависимости
+
+```bash
 cd backend
 pip install -r requirements.txt
+```
 
-# Запустить сервер
+### 3. Запустить backend (Flask API)
+
+```bash
+# Из папки backend
 python run.py
 ```
 
-Откройте `frontend/index.html` в браузере.
+Backend запустится на `http://localhost:5000/api`
+
+### 4. Запустить frontend (в отдельном терминале)
+
+```bash
+# Из корня проекта
+cd frontend
+python -m http.server 5500
+```
+
+Frontend будет доступен на `http://localhost:5500/`
+
+### 5. Открыть приложение
+
+Откройте в браузере: `http://localhost:5500/`
 
 ## API
 
