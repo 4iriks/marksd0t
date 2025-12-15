@@ -55,6 +55,51 @@ Frontend будет доступен на `http://localhost:5500/`
 
 Откройте в браузере: `http://localhost:5500/`
 
+---
+
+## Deployment на публичный сервер
+
+### Требования для production:
+
+1. **Открыть порты в firewall:**
+
+   Linux (Ubuntu/Debian):
+   ```bash
+   sudo ufw allow 5000
+   sudo ufw allow 5500
+   sudo ufw reload
+   ```
+
+   Windows Server:
+   ```powershell
+   netsh advfirewall firewall add rule name="Flask API" dir=in action=allow protocol=TCP localport=5000
+   netsh advfirewall firewall add rule name="Frontend" dir=in action=allow protocol=TCP localport=5500
+   ```
+
+2. **Запуск на публичном IP:**
+
+   Backend автоматически слушает на всех интерфейсах (`0.0.0.0`).
+   
+   Frontend нужно запускать с параметром `--bind`:
+   ```bash
+   cd frontend
+   python3 -m http.server 5500 --bind 0.0.0.0
+   ```
+
+3. **Доступ к приложению:**
+
+   Откройте в браузере: `http://YOUR_SERVER_IP:5500/`
+   
+   API автоматически определит правильный адрес сервера.
+
+### Важно для production:
+
+- ⚠️ **Debug mode отключён** в `backend/run.py` (для безопасности)
+- 🔒 Рекомендуется настроить **HTTPS** с сертификатом (Let's Encrypt)
+- 🚀 Для высоких нагрузок используйте **Gunicorn** + **Nginx** вместо встроенных серверов
+
+---
+
 ## API
 
 - `GET /api/notes` - получить заметки

@@ -1,4 +1,5 @@
-const API_URL = 'http://localhost:5000/api';
+// Автоматически определяем адрес сервера (localhost или IP в сети)
+const API_URL = `http://${window.location.hostname}:5000/api`;
 
 const api = {
     async getNotes(filters = {}) {
